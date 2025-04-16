@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}BMW سدان{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="display-4 fw-bold text-primary">سدان‌های BMW</h2>
+            <p class="lead text-muted">مجموعه‌ای از بهترین سدان‌های BMW با طراحی مدرن و امکانات پیشرفته</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for sedan in sedans %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm hover-card">
+                <div class="position-relative">
+                    {% if sedan.image %}
+                    <img src="{{ sedan.image.url }}" class="card-img-top" alt="{{ sedan.name }}" style="height: 250px; object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'images/car-placeholder.jpg' %}" class="card-img-top" alt="تصویر پیش‌فرض" style="height: 250px; object-fit: cover;">
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ sedan.name }}</h5>
+                    <p class="card-text text-muted">{{ sedan.model }} - {{ sedan.year }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <small class="text-muted">موتور:</small>
+                            <strong>{{ sedan.engine }}</strong>
+                        </div>
+                        <h5 class="text-primary mb-0">{{ sedan.price }} تومان</h5>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'cars:car_detail' sedan.id %}" class="btn btn-outline-primary">
+                            <i class="fas fa-info-circle me-2"></i>
+                            مشاهده جزئیات
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <i class="fas fa-car fa-3x text-muted mb-3"></i>
+            <h3 class="text-muted">در حال حاضر هیچ سدانی موجود نیست</h3>
+            <p class="text-muted">به زودی محصولات جدید اضافه خواهند شد</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.hover-card {
+    transition: transform 0.3s ease-in-out;
+}
+.hover-card:hover {
+    transform: translateY(-5px);
+}
+.card {
+    border: none;
+    border-radius: 15px;
+}
+.card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.btn-outline-primary {
+    border-radius: 25px;
+}
+</style>
+{% endblock %} 

@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ car.name }} - BMW{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'cars:home' %}" class="text-decoration-none">خانه</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'cars:car_list' %}" class="text-decoration-none">خودروها</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ car.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                {% if car.image %}
+                <img src="{{ car.image.url }}" class="img-fluid" alt="{{ car.name }}" style="height: 500px; object-fit: cover;">
+                {% else %}
+                <img src="{% static 'images/car-placeholder.jpg' %}" class="img-fluid" alt="تصویر پیش‌فرض" style="height: 500px; object-fit: cover;">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="sticky-top" style="top: 2rem;">
+                <div class="card border-0 shadow-sm rounded-4 mb-4">
+                    <div class="card-body">
+                        <h1 class="display-6 fw-bold text-primary mb-2">{{ car.name }}</h1>
+                        <p class="lead text-muted mb-4">مدل {{ car.year }}</p>
+                        <h3 class="text-primary mb-4">{{ car.price }} تومان</h3>
+                        <button class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="fas fa-phone me-2"></i>
+                            تماس برای خرید
+                        </button>
+                        <button class="btn btn-outline-primary btn-lg w-100">
+                            <i class="fas fa-heart me-2"></i>
+                            افزودن به علاقه‌مندی‌ها
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">مشخصات فنی</h4>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-engine text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">موتور</small>
+                                        <strong>{{ car.engine }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-cog text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">گیربکس</small>
+                                        <strong>{{ car.transmission }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-gas-pump text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">سوخت</small>
+                                        <strong>{{ car.fuel_type }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-palette text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">رنگ</small>
+                                        <strong>{{ car.color }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">توضیحات</h4>
+                    <p class="text-justify mb-0">{{ car.description|linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">اطلاعات تماس</h4>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="feature-icon me-3">
+                                    <i class="fas fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">تلفن تماس</small>
+                                    <strong>۰۲۱-۱۲۳۴۵۶۷۸</strong>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="feature-icon me-3">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">ایمیل</small>
+                                    <strong>info@bmw.ir</strong>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d-flex align-items-center">
+                                <div class="feature-icon me-3">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">آدرس نمایندگی</small>
+                                    <strong>تهران، خیابان ولیعصر</strong>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.feature-icon i {
+    font-size: 1.2rem;
+}
+.text-justify {
+    text-align: justify;
+}
+.btn {
+    border-radius: 25px;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    float: right;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+</style>
+{% endblock %} 

@@ -1,0 +1,29 @@
+{% extends 'cars/base.html' %}
+
+{% block title %}ورود - فروشگاه BMW{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">ورود به حساب کاربری</h2>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="phone_number" class="form-label">شماره موبایل</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                        <div class="form-text">کد تایید به این شماره ارسال خواهد شد.</div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">دریافت کد تایید</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

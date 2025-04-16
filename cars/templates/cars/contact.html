@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}تماس با ما - BMW{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="display-4 fw-bold text-primary">تماس با ما</h2>
+            <p class="lead text-muted">ما اینجا هستیم تا به سوالات شما پاسخ دهیم</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm rounded-4 h-100">
+                <div class="card-body p-4">
+                    <h4 class="card-title mb-4">اطلاعات تماس</h4>
+                    {% if contact %}
+                    <div class="mb-4">
+                        <h5 class="text-primary mb-3">آدرس</h5>
+                        <p class="mb-0">{{ contact.address|linebreaks }}</p>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="text-primary mb-3">ساعات کاری</h5>
+                        <p class="mb-0">{{ contact.working_hours|linebreaks }}</p>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="text-primary mb-3">راه‌های ارتباطی</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-phone me-2 text-primary"></i>
+                                <a href="tel:{{ contact.phone }}" class="text-decoration-none">{{ contact.phone }}</a>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-envelope me-2 text-primary"></i>
+                                <a href="mailto:{{ contact.email }}" class="text-decoration-none">{{ contact.email }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="text-primary mb-3">شبکه‌های اجتماعی</h5>
+                        <div class="d-flex gap-3">
+                            {% if contact.instagram %}
+                            <a href="{{ contact.instagram }}" target="_blank" class="text-decoration-none">
+                                <i class="fab fa-instagram fa-2x text-primary"></i>
+                            </a>
+                            {% endif %}
+                            {% if contact.telegram %}
+                            <a href="{{ contact.telegram }}" target="_blank" class="text-decoration-none">
+                                <i class="fab fa-telegram fa-2x text-primary"></i>
+                            </a>
+                            {% endif %}
+                            {% if contact.whatsapp %}
+                            <a href="{{ contact.whatsapp }}" target="_blank" class="text-decoration-none">
+                                <i class="fab fa-whatsapp fa-2x text-primary"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-info-circle fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">اطلاعات تماس در دسترس نیست</h4>
+                        <p class="text-muted">لطفاً بعداً مراجعه کنید</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm rounded-4 h-100">
+                <div class="card-body p-4">
+                    <h4 class="card-title mb-4">فرم تماس</h4>
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">نام و نام خانوادگی</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">ایمیل</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">شماره تماس</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">پیام</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-paper-plane me-2"></i>
+                            ارسال پیام
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    border: none;
+}
+.form-control {
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 102, 178, 0.25);
+    border-color: #0066b2;
+}
+.btn-primary {
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+}
+</style>
+{% endblock %} 

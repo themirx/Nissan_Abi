@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}BMW - نمایندگی رسمی فروش خودرو و لاستیک{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero position-relative overflow-hidden">
+    <div class="hero-bg position-absolute w-100 h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1555652736-e92021d28a10?auto=format&fit=crop&q=80') center/cover no-repeat;"></div>
+    <div class="container position-relative" style="z-index: 1;">
+        <div class="row min-vh-100 align-items-center">
+            <div class="col-lg-6 text-white">
+                <h1 class="display-3 fw-bold mb-4">به دنیای BMW خوش آمدید</h1>
+                <p class="lead mb-4">تجربه‌ای متفاوت از رانندگی با محصولات با کیفیت BMW</p>
+                <div class="d-flex gap-3">
+                    <a href="{% url 'cars:car_list' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-car me-2"></i>
+                        مشاهده خودروها
+                    </a>
+                    <a href="{% url 'cars:tire_list' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-circle me-2"></i>
+                        خرید لاستیک
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                        </div>
+                        <h4>گارانتی اصالت</h4>
+                        <p class="text-muted">تمامی محصولات دارای گارانتی اصالت و خدمات پس از فروش هستند</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-tools fa-3x text-primary"></i>
+                        </div>
+                        <h4>خدمات تخصصی</h4>
+                        <p class="text-muted">ارائه خدمات تخصصی توسط کارشناسان مجرب و آموزش دیده</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-headset fa-3x text-primary"></i>
+                        </div>
+                        <h4>پشتیبانی ۲۴/۷</h4>
+                        <p class="text-muted">پشتیبانی شبانه‌روزی و پاسخگویی به تمامی نیازهای شما</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest Cars Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="display-5 fw-bold mb-3">جدیدترین خودروها</h2>
+                <p class="lead text-muted">آخرین مدل‌های BMW موجود در نمایندگی</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for car in latest_cars %}
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm hover-card h-100">
+                    <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.name }}" style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ car.name }}</h5>
+                        <p class="card-text text-muted">{{ car.description|truncatewords:20 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 text-primary mb-0">{{ car.price }} تومان</span>
+                            <a href="{% url 'cars:car_detail' car.id %}" class="btn btn-outline-primary">جزئیات بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <a href="{% url 'cars:car_list' %}" class="btn btn-primary btn-lg">مشاهده همه خودروها</a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact CTA Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-3">با ما در تماس باشید</h2>
+                <p class="lead text-muted mb-4">برای مشاوره رایگان و کسب اطلاعات بیشتر با ما تماس بگیرید</p>
+                <a href="tel:02112345678" class="btn btn-primary btn-lg">
+                    <i class="fas fa-phone me-2"></i>
+                    ۰۲۱-۱۲۳۴۵۶۷۸
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.hero {
+    margin-top: -1rem;
+}
+.hero-bg {
+    top: 0;
+    left: 0;
+}
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.hover-card {
+    transition: transform 0.3s ease;
+}
+.hover-card:hover {
+    transform: translateY(-5px);
+}
+</style>
+{% endblock %} 

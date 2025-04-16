@@ -1,0 +1,34 @@
+{% extends 'cars/base.html' %}
+
+{% block title %}تایید کد - فروشگاه BMW{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">تایید کد</h2>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="phone_number" class="form-label">شماره موبایل</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="code" class="form-label">کد تایید</label>
+                        <input type="text" class="form-control" id="code" name="code" required>
+                        <div class="form-text">کد 6 رقمی ارسال شده به شماره موبایل خود را وارد کنید.</div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">تایید</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

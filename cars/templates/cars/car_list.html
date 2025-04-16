@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}لیست خودروهای BMW{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="display-4 fw-bold text-primary">خودروهای BMW</h2>
+            <p class="lead text-muted">مجموعه‌ای از بهترین و به‌روزترین مدل‌های BMW</p>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="جستجوی خودرو...">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary active">همه</button>
+                <button type="button" class="btn btn-outline-primary">سدان</button>
+                <button type="button" class="btn btn-outline-primary">شاسی بلند</button>
+                <button type="button" class="btn btn-outline-primary">کوپه</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for car in cars %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm hover-card">
+                <div class="position-relative">
+                    {% if car.image %}
+                    <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.name }}" style="height: 250px; object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'images/car-placeholder.jpg' %}" class="card-img-top" alt="تصویر پیش‌فرض" style="height: 250px; object-fit: cover;">
+                    {% endif %}
+                    <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(transparent, rgba(0,0,0,0.7));">
+                        <h5 class="card-title text-white mb-0">{{ car.name }}</h5>
+                        <small class="text-white-50">مدل {{ car.year }}</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-engine text-primary me-2"></i>
+                                <small class="text-muted">{{ car.engine }}</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-gas-pump text-primary me-2"></i>
+                                <small class="text-muted">{{ car.fuel_type }}</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-cog text-primary me-2"></i>
+                                <small class="text-muted">{{ car.transmission }}</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-palette text-primary me-2"></i>
+                                <small class="text-muted">{{ car.color }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="text-primary mb-0">{{ car.price }} تومان</h5>
+                        <a href="{% url 'cars:car_detail' car.pk %}" class="btn btn-outline-primary">
+                            <i class="fas fa-info-circle me-2"></i>
+                            جزئیات بیشتر
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <i class="fas fa-car fa-3x text-muted mb-3"></i>
+            <h3 class="text-muted">در حال حاضر هیچ خودرویی موجود نیست</h3>
+            <p class="text-muted">به زودی مدل‌های جدید اضافه خواهند شد</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.hover-card {
+    transition: transform 0.3s ease;
+}
+.hover-card:hover {
+    transform: translateY(-5px);
+}
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+.card-img-top {
+    transition: transform 0.3s ease;
+}
+.hover-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+.btn-outline-primary {
+    border-radius: 25px;
+}
+</style>
+{% endblock %} 
