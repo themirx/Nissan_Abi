@@ -1,63 +1,69 @@
-# BMW نمایندگی فروش خودرو و لاستیک
+# Nissan_Abi
 
-این پروژه یک وب‌سایت برای نمایندگی فروش خودرو و لاستیک BMW است که با Django توسعه داده شده است.
+## درباره پروژه
+این پروژه یک وب‌سایت برای نمایشگاه خودرو و لاستیک نیسان است که با Django توسعه داده شده است.
 
 ## ویژگی‌ها
-
-- نمایش خودروهای BMW
+- نمایش خودروهای نیسان
 - نمایش لاستیک‌های موجود
-- سیستم احراز هویت با شماره موبایل
-- پنل مدیریت برای ادمین‌ها
-- جستجوی پیشرفته خودروها
+- احراز هویت با شماره موبایل
+- پنل مدیریت
+- جستجوی پیشرفته خودرو
 - صفحه تماس با ما
 
 ## نصب و راه‌اندازی
-
-1. کلون کردن پروژه:
+1. پروژه را کلون کنید:
 ```bash
-git clone https://github.com/your-username/bmw.git
-cd bmw
+git clone https://github.com/themirx/Nissan_Abi.git
+cd Nissan_Abi
 ```
 
-2. ایجاد محیط مجازی و نصب نیازمندی‌ها:
+2. محیط مجازی را فعال کنید:
 ```bash
 python -m venv venv
-source venv/bin/activate  # در ویندوز: venv\Scripts\activate
+source venv/bin/activate  # در لینوکس/مک
+venv\Scripts\activate     # در ویندوز
+```
+
+3. نیازمندی‌ها را نصب کنید:
+```bash
 pip install -r requirements.txt
 ```
 
-3. اجرای مایگریشن‌ها:
+4. فایل `.env` را ایجاد کنید:
+```bash
+cp .env.example .env
+```
+
+5. پایگاه داده را راه‌اندازی کنید:
 ```bash
 python manage.py migrate
 ```
 
-4. ایجاد کاربر ادمین:
+6. یک کاربر ادمین ایجاد کنید:
 ```bash
 python manage.py createsuperuser
 ```
 
-5. اجرای سرور:
+7. سرور را اجرا کنید:
 ```bash
 python manage.py runserver
 ```
 
 ## ساختار پروژه
-
-- `cars/`: اپلیکیشن اصلی پروژه
-  - `models.py`: مدل‌های دیتابیس
-  - `views.py`: ویوهای پروژه
-  - `urls.py`: مسیرهای پروژه
-  - `templates/`: فایل‌های قالب
+- `cars/`: اپلیکیشن اصلی
+  - `models.py`: مدل‌های داده
+  - `views.py`: کنترلرها
+  - `templates/`: قالب‌های HTML
   - `static/`: فایل‌های استاتیک
-  - `media/`: فایل‌های آپلود شده
+  - `urls.py`: مسیریابی
 
 ## نیازمندی‌ها
-
 - Python 3.8+
 - Django 5.2
-- Pillow
-- و سایر پکیج‌های موجود در `requirements.txt`
+- Pillow 10.2.0
+- python-dotenv 1.0.1
+- requests 2.31.0
 
 ## مجوز
-
-این پروژه تحت مجوز MIT منتشر شده است. 
+این پروژه تحت مجوز MIT منتشر شده است.
