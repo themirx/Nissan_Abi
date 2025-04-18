@@ -7,7 +7,7 @@ services:
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
     startCommand: |
-      python -m gunicorn bmw_project.wsgi:application --bind 0.0.0.0:$PORT
+      python -m daphne -b 0.0.0.0 -p $PORT bmw_project.asgi:application
     envVars:
       - key: PYTHON_VERSION
         value: 3.8.0
