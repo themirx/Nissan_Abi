@@ -1,0 +1,1 @@
+web: gunicorn bmw_project.wsgi:application 

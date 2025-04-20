@@ -1,0 +1,8 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "python -m pip install -r requirements.txt"
+
+[deploy]
+startCommand = "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn bmw_project.wsgi:application"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10 

@@ -34,8 +34,8 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'nissan-abi.onrender.com',
-    '.onrender.com'  # برای همه زیردامنه‌های render.com
+    '.up.railway.app',
+    '*'
 ]
 
 
@@ -89,9 +89,7 @@ WSGI_APPLICATION = 'bmw_project.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:////' + os.path.join(BASE_DIR, 'data', 'db.sqlite3'),
-        conn_max_age=600,
-        conn_health_checks=True,
-        ssl_require=False
+        conn_max_age=600
     )
 }
 
