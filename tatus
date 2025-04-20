@@ -1,0 +1,5 @@
+[33mc4b0454[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m تنظیم دیتابیس SQLite و بهروزرسانی render.yaml
+[33m9e3f337[m Add nissan-abi.onrender.com to ALLOWED_HOSTS
+[33mff20171[m به‌روزرسانی کامل requirements.txt با تمام نیازمندی‌ها
+[33me75ef45[m Update requirements.txt
+[33m09f1fd7[m Update requirements.txt
