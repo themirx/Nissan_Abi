@@ -89,7 +89,9 @@ WSGI_APPLICATION = 'bmw_project.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:////' + os.path.join(BASE_DIR, 'data', 'db.sqlite3'),
-        conn_max_age=600
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=False
     )
 }
 
