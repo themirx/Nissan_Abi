@@ -25,9 +25,34 @@ services:
         value: "False"
       - key: RENDER
         value: "true"
+      - key: POSTGRES_HOST
+        fromService:
+          type: postgres
+          name: nissan-db
+          property: host
+      - key: POSTGRES_DB
+        fromService:
+          type: postgres
+          name: nissan-db
+          property: database
+      - key: POSTGRES_USER
+        fromService:
+          type: postgres
+          name: nissan-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromService:
+          type: postgres
+          name: nissan-db
+          property: password
     disk:
       name: sqlite-data
       mountPath: /opt/render/project/src
       sizeGB: 1
     healthCheckPath: /
     autoDeploy: true
+
+  - type: postgres
+    name: nissan-db
+    ipAllowList: []
+    plan: free

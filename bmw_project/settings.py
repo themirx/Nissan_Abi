@@ -87,8 +87,15 @@ WSGI_APPLICATION = 'bmw_project.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql' if os.getenv('RENDER') else 'django.db.backends.sqlite3',
+        'NAME': os.getenv('POSTGRES_DB', 'db.sqlite3'),
+        'USER': os.getenv('POSTGRES_USER', ''),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
+        'HOST': os.getenv('POSTGRES_HOST', ''),
+        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+    } if os.getenv('RENDER') else {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/opt/render/project/src/data/db.sqlite3' if os.getenv('RENDER') else os.path.join(BASE_DIR, 'data', 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'data', 'db.sqlite3'),
     }
 }
 
