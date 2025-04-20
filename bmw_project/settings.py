@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 # بارگذاری متغیرهای محیطی
 load_dotenv()
@@ -86,17 +87,10 @@ WSGI_APPLICATION = 'bmw_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql' if os.getenv('RENDER') else 'django.db.backends.sqlite3',
-        'NAME': os.getenv('POSTGRES_DB', 'db.sqlite3'),
-        'USER': os.getenv('POSTGRES_USER', ''),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
-        'HOST': os.getenv('POSTGRES_HOST', ''),
-        'PORT': os.getenv('POSTGRES_PORT', '5432'),
-    } if os.getenv('RENDER') else {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'data', 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default='sqlite:////' + os.path.join(BASE_DIR, 'data', 'db.sqlite3'),
+        conn_max_age=600
+    )
 }
 
 

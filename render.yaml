@@ -5,11 +5,10 @@ services:
     buildCommand: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
-      mkdir -p /opt/render/project/src/data
+      python manage.py collectstatic --noinput
       python manage.py makemigrations cars
       python manage.py migrate --run-syncdb
       python manage.py migrate
-      python manage.py collectstatic --noinput
     startCommand: |
       python -m gunicorn bmw_project.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
@@ -25,34 +24,7 @@ services:
         value: "False"
       - key: RENDER
         value: "true"
-      - key: POSTGRES_HOST
-        fromService:
-          type: postgres
-          name: nissan-db
-          property: host
-      - key: POSTGRES_DB
-        fromService:
-          type: postgres
-          name: nissan-db
-          property: database
-      - key: POSTGRES_USER
-        fromService:
-          type: postgres
-          name: nissan-db
-          property: user
-      - key: POSTGRES_PASSWORD
-        fromService:
-          type: postgres
-          name: nissan-db
-          property: password
-    disk:
-      name: sqlite-data
-      mountPath: /opt/render/project/src
-      sizeGB: 1
+      - key: DATABASE_URL
+        sync: false
     healthCheckPath: /
     autoDeploy: true
-
-  - type: postgres
-    name: nissan-db
-    ipAllowList: []
-    plan: free
