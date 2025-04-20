@@ -27,4 +27,4 @@ services:
       mountPath: /opt/render/project/src/data
       sizeGB: 1
     healthCheckPath: /
-    autoDeploy: true 
+    autoDeploy: true
