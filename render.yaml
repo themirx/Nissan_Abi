@@ -5,11 +5,18 @@ services:
     buildCommand: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
-      python manage.py makemigrations
-      python manage.py makemigrations cars
-      python manage.py migrate auth
-      python manage.py migrate --run-syncdb
-      python manage.py migrate
+      echo "from django.db import connection
+      from django.core.management import call_command
+      
+      with connection.cursor() as cursor:
+          cursor.execute('DROP SCHEMA public CASCADE;')
+          cursor.execute('CREATE SCHEMA public;')
+      
+      call_command('makemigrations')
+      call_command('makemigrations', 'cars')
+      call_command('migrate', '--run-syncdb')
+      call_command('migrate')" > migrate.py
+      python migrate.py
       python manage.py collectstatic --noinput
     startCommand: gunicorn bmw_project.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
