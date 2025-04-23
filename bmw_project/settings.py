@@ -29,13 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-your-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '.up.railway.app',
-    '*'
+    '.up.railway.app'
 ]
 
 
@@ -158,3 +157,14 @@ LOGOUT_REDIRECT_URL = 'cars:home'
 
 # تنظیمات جلسه
 SESSION_COOKIE_AGE = 1209600  # 2 هفته
+
+# تنظیمات امنیتی
+SECURE_HSTS_SECONDS = 31536000  # 1 سال
+SECURE_SSL_REDIRECT = True  # فعال کردن برای محیط تولید
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SESSION_COOKIE_SECURE = True  # فعال کردن برای محیط تولید
+CSRF_COOKIE_SECURE = True  # فعال کردن برای محیط تولید
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'

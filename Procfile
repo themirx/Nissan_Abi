@@ -1,1 +1,1 @@
-web: gunicorn bmw_project.wsgi:application 
+web: gunicorn bmw_project.wsgi --log-file - 
