@@ -160,11 +160,11 @@ SESSION_COOKIE_AGE = 1209600  # 2 هفته
 
 # تنظیمات امنیتی
 SECURE_HSTS_SECONDS = 31536000  # 1 سال
-SECURE_SSL_REDIRECT = True  # فعال کردن برای محیط تولید
+SECURE_SSL_REDIRECT = False if DEBUG else True  # در محیط توسعه غیرفعال شود
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SESSION_COOKIE_SECURE = True  # فعال کردن برای محیط تولید
-CSRF_COOKIE_SECURE = True  # فعال کردن برای محیط تولید
+SESSION_COOKIE_SECURE = False if DEBUG else True  # در محیط توسعه غیرفعال شود
+CSRF_COOKIE_SECURE = False if DEBUG else True  # در محیط توسعه غیرفعال شود
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
